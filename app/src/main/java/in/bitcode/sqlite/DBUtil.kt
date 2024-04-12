@@ -11,7 +11,11 @@ import android.widget.Toast
 class DBUtil(
     private val context: Context
 ) {
-    private val db: SQLiteDatabase =
+
+    private val db : SQLiteDatabase = ProductsDBHelper(context, "db_products", null, 1)
+        .writableDatabase
+
+    /*private val db: SQLiteDatabase =
         context.openOrCreateDatabase("db_products", Activity.MODE_PRIVATE, null)
 
     init {
@@ -20,6 +24,8 @@ class DBUtil(
         } catch (e: Exception) {
         }
     }
+    */
+
 
     fun addProduct(id: Int, title: String, price: Int): Boolean {
         val values = ContentValues()
@@ -27,7 +33,7 @@ class DBUtil(
         values.put("title", title)
         values.put("price", price)
 
-        var rowNum = db.insert("products", null, values)
+        val rowNum = db.insert("products", null, values)
         mt("$rowNum")
 
         return rowNum.toInt() != -1
@@ -90,6 +96,5 @@ class DBUtil(
         Log.e("tag", text)
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
-
 
 }

@@ -35,11 +35,27 @@ class MainActivity : AppCompatActivity() {
         isUpdated = dbUtil.updateProduct(1004, "New Product title 04", 4000)
         mt("Update: $isUpdated")*/
 
-        var isDeleted = dbUtil.deleteProduct(104)
+        dbUtil.addProduct(3001, "Test Product 3001", 30000)
+        for(product in dbUtil.fetchProducts() ) {
+            mt(product.toString())
+        }
+
+        dbUtil.updateProduct(3001, "Test Product 3001-Updated", 3333)
+        for(product in dbUtil.fetchProducts() ) {
+            mt(product.toString())
+        }
+
+        dbUtil.deleteProduct(3001)
+        for(product in dbUtil.fetchProducts() ) {
+            mt(product.toString())
+        }
+
+
+        /*var isDeleted = dbUtil.deleteProduct(104)
         mt("Delete: $isDeleted")
         isDeleted = dbUtil.deleteProduct(104)
         mt("Delete: $isDeleted")
-
+        */
 
         /*db = openOrCreateDatabase("db_ecomm", Activity.MODE_PRIVATE, null)
 
